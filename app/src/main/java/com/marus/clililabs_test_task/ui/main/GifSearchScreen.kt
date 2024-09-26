@@ -1,5 +1,6 @@
 package com.marus.clililabs_test_task.ui.main
 
+import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -81,6 +83,7 @@ fun GifSearchScreen(
 
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
+    val configuration = LocalConfiguration.current
 
     CliliLabstesttaskTheme {
         Scaffold(
@@ -106,8 +109,16 @@ fun GifSearchScreen(
                         }
                     )
 
+                    val columns = remember(configuration.orientation) {
+                        if (configuration.orientation == ORIENTATION_PORTRAIT) {
+                            2
+                        } else {
+                            3
+                        }
+                    }
+
                     LazyVerticalGrid(
-                        columns = GridCells.Fixed(2),
+                        columns = GridCells.Fixed(columns),
                         contentPadding = PaddingValues(8.dp)
                     ) {
                         items(gifs.itemCount) { index ->
