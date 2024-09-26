@@ -23,21 +23,30 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+sealed class Destination(
+    val route: String
+) {
+    data object Search : Destination("search")
+    data object Details: Destination("gifDetailScreen/{gifId}") {
+        fun createRoute(gifId: String) = "gifDetailScreen/$gifId"
+    }
+}
+
 @Composable
 fun GiphyApp() {
     val navController = rememberNavController()
     val searchViewModel = viewModel<GifSearchViewModel>()
 
-    NavHost(navController = navController, startDestination = "searchScreen") {
-        composable("searchScreen") {
+    NavHost(navController = navController, startDestination = Destination.Search.route) {
+        composable(Destination.Search.route) {
             GifSearchScreen(
                 viewModel = searchViewModel,
                 onNavigateToGifDetails = { gifId ->
-                    navController.navigate("gifDetailScreen/$gifId")
+                    navController.navigate(Destination.Details.createRoute(gifId))
                 }
             )
         }
-        activity("gifDetailScreen/{gifId}") {
+        activity(Destination.Details.route) {
             argument("gifId") { type = NavType.StringType }
             activityClass = GifDetailsActivity::class
         }

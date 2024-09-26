@@ -37,6 +37,7 @@ import com.bumptech.glide.integration.compose.placeholder
 import com.marus.clililabs_test_task.R
 import com.marus.clililabs_test_task.model.Gif
 import com.marus.clililabs_test_task.ui.common.views.LoadingView
+import com.marus.clililabs_test_task.ui.theme.CliliLabstesttaskTheme
 import com.marus.clililabs_test_task.ui.theme.WhiteSemiTransparent
 import com.marus.clililabs_test_task.ui.util.SampleData
 
@@ -51,30 +52,32 @@ fun GiftDetailsScreen(
     val isLoading by viewModel.isLoading.collectAsState()
     val context = LocalContext.current
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = stringResource(R.string.title_gif_details)) },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        (context as? Activity)?.finish()
-                    }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+    CliliLabstesttaskTheme {
+        Scaffold(
+            topBar = {
+                CenterAlignedTopAppBar(
+                    title = { Text(text = stringResource(R.string.title_gif_details)) },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            (context as? Activity)?.finish()
+                        }) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        }
                     }
-                }
-            )
-        }
-    ) { innerPadding ->
-        LaunchedEffect(key1 = true) {
-            viewModel.findGifById(gifId)
-        }
+                )
+            }
+        ) { innerPadding ->
+            LaunchedEffect(key1 = true) {
+                viewModel.findGifById(gifId)
+            }
 
-        gif?.let {
-            GifDetailsScreenContent(
-                innerPadding = innerPadding,
-                isLoading = isLoading,
-                gif = it
-            )
+            gif?.let {
+                GifDetailsScreenContent(
+                    innerPadding = innerPadding,
+                    isLoading = isLoading,
+                    gif = it
+                )
+            }
         }
     }
 }

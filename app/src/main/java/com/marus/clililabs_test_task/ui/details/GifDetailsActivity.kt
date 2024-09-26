@@ -20,12 +20,10 @@ class GifDetailsActivity : ComponentActivity() {
         setContent {
             val gifDetailsViewModel = viewModel<GifDetailsViewModel>()
 
-            CliliLabstesttaskTheme {
-                GiftDetailsScreen(
-                    gifId = intent?.getStringExtra(GIF_ID_EXTRA)!!,
-                    viewModel = gifDetailsViewModel
-                )
-            }
+            GiftDetailsScreen(
+                gifId = intent?.getStringExtra(GIF_ID_EXTRA)!!,
+                viewModel = gifDetailsViewModel
+            )
         }
     }
 }
