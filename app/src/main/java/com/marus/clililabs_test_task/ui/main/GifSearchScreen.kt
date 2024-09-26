@@ -1,7 +1,6 @@
 package com.marus.clililabs_test_task.ui.main
 
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -151,52 +150,58 @@ fun GifSearchScreen(
                     LaunchedEffect(gifs.loadState) {
                         when (gifs.loadState.refresh) {
                             is LoadState.Loading -> {
-                                Log.d("SearchScreen", "refresh: Loading")
                                 loadingFirstPage = true
                             }
 
                             is LoadState.NotLoading -> {
-                                Log.d("SearchScreen", "refresh: NotLoading")
                                 loadingFirstPage = false
                                 isNoResultsViewVisible =
                                     gifs.loadState.append.endOfPaginationReached && gifs.itemCount == 0
                             }
 
                             is LoadState.Error -> {
-                                Log.d("SearchScreen", "refresh: Error")
                                 loadingFirstPage = false
                             }
                         }
 
                         loadingNextPage = when (gifs.loadState.append) {
                             is LoadState.Loading -> {
-                                Log.d("SearchScreen", "append: Loading")
                                 true
                             }
 
                             is LoadState.NotLoading -> {
-                                Log.d("SearchScreen", "append: NotLoading")
                                 false
                             }
 
                             is LoadState.Error -> {
-                                Log.d("SearchScreen", "append: Error")
                                 false
                             }
                         }
                     }
                 }
-                if (loadingFirstPage) {
-                    LoadingView(
-                        modifier = Modifier.fillMaxSize()
-                    )
-                } else {
-                    if (isEmptyViewVisible) {
+
+                when {
+                    loadingFirstPage -> {
+                        LoadingView(
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
+
+                    !isConnected && gifs.itemSnapshotList.isEmpty() -> {
+                        EmptyView(
+                            modifier = Modifier.align(Alignment.Center),
+                            stringResId = R.string.error_no_internet
+                        )
+                    }
+
+                    isEmptyViewVisible -> {
                         EmptyView(
                             modifier = Modifier.align(Alignment.Center),
                             stringResId = R.string.empty_view_text_no_query
                         )
-                    } else if (isNoResultsViewVisible) {
+                    }
+
+                    isNoResultsViewVisible -> {
                         EmptyView(
                             modifier = Modifier.align(Alignment.Center),
                             stringResId = R.string.empty_view_text_no_results

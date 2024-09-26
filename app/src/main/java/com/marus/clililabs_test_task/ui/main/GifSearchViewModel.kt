@@ -50,5 +50,6 @@ class GifSearchViewModel @Inject constructor(
 
     fun clearSearchResults() {
         _currentSearchResult.value = PagingData.empty()
+        currentQueryValue = null
     }
 }
