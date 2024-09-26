@@ -1,7 +1,6 @@
 package com.marus.clililabs_test_task.ui.main
 
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -22,7 +21,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -54,7 +52,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import com.marus.clililabs_test_task.R
 import com.marus.clililabs_test_task.model.Gif
-import com.marus.clililabs_test_task.ui.common.views.LoadingView
+import com.marus.clililabs_test_task.ui.common.LoadingView
 import com.marus.clililabs_test_task.ui.theme.CliliLabstesttaskTheme
 import com.marus.clililabs_test_task.ui.theme.ScreenBackground
 import kotlinx.coroutines.CoroutineScope

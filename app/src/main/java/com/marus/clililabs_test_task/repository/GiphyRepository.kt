@@ -27,8 +27,7 @@ class GiphyRepository @Inject constructor(
         if (response.isSuccessful()) {
             return response.data
         } else {
-            throw Exception("Failed to fetch GIF details")
+            throw Exception(response.getErrorMessage())
         }
     }
-
 }

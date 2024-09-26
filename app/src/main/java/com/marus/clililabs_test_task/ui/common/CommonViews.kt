@@ -1,4 +1,4 @@
-package com.marus.clililabs_test_task.ui.common.views
+package com.marus.clililabs_test_task.ui.common
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.width

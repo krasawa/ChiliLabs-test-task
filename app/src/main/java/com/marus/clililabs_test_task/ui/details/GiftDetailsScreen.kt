@@ -37,7 +37,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import com.marus.clililabs_test_task.R
 import com.marus.clililabs_test_task.model.Gif
-import com.marus.clililabs_test_task.ui.common.views.LoadingView
+import com.marus.clililabs_test_task.ui.common.LoadingView
 import com.marus.clililabs_test_task.ui.theme.CliliLabstesttaskTheme
 import com.marus.clililabs_test_task.ui.theme.WhiteSemiTransparent
 import com.marus.clililabs_test_task.ui.util.SampleData
