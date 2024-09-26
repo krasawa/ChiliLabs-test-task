@@ -1,8 +1,8 @@
 package com.marus.clililabs_test_task.di
 
-import com.marus.clililabs_test_task.api.service.GiphyApi
-import com.marus.clililabs_test_task.repository.GiphyRepository
-import com.marus.clililabs_test_task.repository.RemoteGiphyRepository
+import com.marus.clililabs_test_task.data.api.service.GiphyApi
+import com.marus.clililabs_test_task.data.repository.GiphyRepository
+import com.marus.clililabs_test_task.data.repository.RemoteGiphyRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

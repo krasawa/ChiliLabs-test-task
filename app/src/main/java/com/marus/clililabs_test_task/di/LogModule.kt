@@ -1,6 +1,6 @@
 package com.marus.clililabs_test_task.di
 
-import com.marus.clililabs_test_task.api.service.GiphyApi
+import com.marus.clililabs_test_task.data.api.service.GiphyApi
 import com.marus.clililabs_test_task.util.DefaultLogger
 import com.marus.clililabs_test_task.util.Logger
 import dagger.Module

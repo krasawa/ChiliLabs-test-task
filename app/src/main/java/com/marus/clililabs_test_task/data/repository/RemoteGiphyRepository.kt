@@ -1,11 +1,11 @@
-package com.marus.clililabs_test_task.repository
+package com.marus.clililabs_test_task.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.marus.clililabs_test_task.api.service.GiphyApi
-import com.marus.clililabs_test_task.model.Gif
-import com.marus.clililabs_test_task.repository.datasource.GiphyPagingSource
+import com.marus.clililabs_test_task.data.api.service.GiphyApi
+import com.marus.clililabs_test_task.data.model.Gif
+import com.marus.clililabs_test_task.data.repository.datasource.GiphyPagingSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

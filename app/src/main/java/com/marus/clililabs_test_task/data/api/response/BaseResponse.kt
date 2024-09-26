@@ -1,4 +1,4 @@
-package com.marus.clililabs_test_task.api.response
+package com.marus.clililabs_test_task.data.api.response
 
 abstract class BaseResponse {
     private val meta: ResponseMeta? = null

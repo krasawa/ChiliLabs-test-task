@@ -1,6 +1,6 @@
 package com.marus.clililabs_test_task
 
-import com.marus.clililabs_test_task.repository.GiphyRepository
+import com.marus.clililabs_test_task.data.repository.GiphyRepository
 import com.marus.clililabs_test_task.ui.details.GifDetailsViewModel
 import com.marus.clililabs_test_task.ui.util.SampleData
 import com.marus.clililabs_test_task.util.Logger

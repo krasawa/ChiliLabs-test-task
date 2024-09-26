@@ -1,10 +1,10 @@
-package com.marus.clililabs_test_task.repository.datasource
+package com.marus.clililabs_test_task.data.repository.datasource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.marus.clililabs_test_task.BuildConfig
-import com.marus.clililabs_test_task.api.service.GiphyApi
-import com.marus.clililabs_test_task.model.Gif
+import com.marus.clililabs_test_task.data.api.service.GiphyApi
+import com.marus.clililabs_test_task.data.model.Gif
 
 class GiphyPagingSource(
     private val api: GiphyApi,

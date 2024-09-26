@@ -1,7 +1,7 @@
-package com.marus.clililabs_test_task.api.response
+package com.marus.clililabs_test_task.data.api.response
 
 import com.google.gson.annotations.SerializedName
-import com.marus.clililabs_test_task.model.Gif
+import com.marus.clililabs_test_task.data.model.Gif
 
 data class GiphySearchResponse(
     val data: List<Gif>,

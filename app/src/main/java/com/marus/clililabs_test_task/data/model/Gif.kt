@@ -1,4 +1,4 @@
-package com.marus.clililabs_test_task.model
+package com.marus.clililabs_test_task.data.model
 
 data class Gif(
     val id: String,

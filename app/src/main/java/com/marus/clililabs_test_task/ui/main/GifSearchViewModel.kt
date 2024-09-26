@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.marus.clililabs_test_task.model.Gif
-import com.marus.clililabs_test_task.repository.GiphyRepository
+import com.marus.clililabs_test_task.data.model.Gif
+import com.marus.clililabs_test_task.data.repository.GiphyRepository
 import com.marus.clililabs_test_task.util.Logger
 import com.marus.clililabs_test_task.util.NetworkMonitor
 import dagger.hilt.android.lifecycle.HiltViewModel

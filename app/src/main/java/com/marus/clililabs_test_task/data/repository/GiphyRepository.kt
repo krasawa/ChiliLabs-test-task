@@ -1,7 +1,7 @@
-package com.marus.clililabs_test_task.repository
+package com.marus.clililabs_test_task.data.repository
 
 import androidx.paging.PagingData
-import com.marus.clililabs_test_task.model.Gif
+import com.marus.clililabs_test_task.data.model.Gif
 import kotlinx.coroutines.flow.Flow
 
 interface GiphyRepository {

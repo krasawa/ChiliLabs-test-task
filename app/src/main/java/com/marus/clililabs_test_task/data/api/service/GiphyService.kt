@@ -1,8 +1,8 @@
-package com.marus.clililabs_test_task.api.service
+package com.marus.clililabs_test_task.data.api.service
 
 import com.marus.clililabs_test_task.BuildConfig
-import com.marus.clililabs_test_task.api.response.GiphyDetailsResponse
-import com.marus.clililabs_test_task.api.response.GiphySearchResponse
+import com.marus.clililabs_test_task.data.api.response.GiphyDetailsResponse
+import com.marus.clililabs_test_task.data.api.response.GiphySearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

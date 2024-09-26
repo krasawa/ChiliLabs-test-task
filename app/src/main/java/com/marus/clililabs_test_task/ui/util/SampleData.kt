@@ -1,8 +1,8 @@
 package com.marus.clililabs_test_task.ui.util
 
-import com.marus.clililabs_test_task.model.Gif
-import com.marus.clililabs_test_task.model.Images
-import com.marus.clililabs_test_task.model.OriginalImage
+import com.marus.clililabs_test_task.data.model.Gif
+import com.marus.clililabs_test_task.data.model.Images
+import com.marus.clililabs_test_task.data.model.OriginalImage
 
 object SampleData {
     fun getGifSample(id: String = "12345"): Gif {

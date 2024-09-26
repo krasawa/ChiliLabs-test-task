@@ -2,8 +2,8 @@ package com.marus.clililabs_test_task.ui.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marus.clililabs_test_task.model.Gif
-import com.marus.clililabs_test_task.repository.GiphyRepository
+import com.marus.clililabs_test_task.data.model.Gif
+import com.marus.clililabs_test_task.data.repository.GiphyRepository
 import com.marus.clililabs_test_task.util.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
