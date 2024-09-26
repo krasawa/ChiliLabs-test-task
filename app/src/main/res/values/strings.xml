@@ -4,4 +4,6 @@
     <string name="title_gif_details">GIF Details</string>
     <string name="empty_view_text_no_query">Use search bar to start searching for gifs</string>
     <string name="empty_view_text_no_results">Nothing found for your query, try to change it</string>
+    <string name="error_no_internet">No internet connection</string>
+    <string name="action_repeat">Repeat</string>
 </resources>

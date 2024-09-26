@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.marus.clililabs_test_task.model.Gif
 import com.marus.clililabs_test_task.repository.GiphyRepository
+import com.marus.clililabs_test_task.util.NetworkMonitor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GifSearchViewModel @Inject constructor(
-    private val repository: GiphyRepository
+    private val repository: GiphyRepository,
+    private val networkMonitor: NetworkMonitor
 ) : ViewModel() {
 
     companion object {
@@ -29,6 +31,8 @@ class GifSearchViewModel @Inject constructor(
 
     private val _currentSearchResult: MutableStateFlow<PagingData<Gif>> = MutableStateFlow(value = PagingData.empty())
     val currentSearchResult: MutableStateFlow<PagingData<Gif>> get() = _currentSearchResult
+
+    val isNetworkAvailable = networkMonitor.isConnected
 
     fun searchGifs(query: String) {
         Log.d(TAG, "searchGifs() called with: query = $query")

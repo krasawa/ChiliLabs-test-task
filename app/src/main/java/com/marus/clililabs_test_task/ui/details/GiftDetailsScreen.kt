@@ -1,6 +1,7 @@
 package com.marus.clililabs_test_task.ui.details
 
 import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -50,6 +51,8 @@ fun GiftDetailsScreen(
 ) {
     val gif by viewModel.gif.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
+    val errorMessage by viewModel.errorMessage.collectAsState()
+
     val context = LocalContext.current
 
     CliliLabstesttaskTheme {
@@ -69,6 +72,13 @@ fun GiftDetailsScreen(
         ) { innerPadding ->
             LaunchedEffect(key1 = true) {
                 viewModel.findGifById(gifId)
+            }
+
+            LaunchedEffect(key1 = errorMessage) {
+                if (errorMessage.isNotEmpty()) {
+                    Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                    viewModel.clearErrorMessage()
+                }
             }
 
             gif?.let {
