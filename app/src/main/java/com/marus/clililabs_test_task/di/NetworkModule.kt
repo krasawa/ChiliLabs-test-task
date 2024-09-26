@@ -1,6 +1,8 @@
 package com.marus.clililabs_test_task.di
 
 import com.marus.clililabs_test_task.api.service.GiphyApi
+import com.marus.clililabs_test_task.repository.GiphyRepository
+import com.marus.clililabs_test_task.repository.RemoteGiphyRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,5 +27,11 @@ object NetworkModule {
     @Singleton
     fun provideGiphyApi(retrofit: Retrofit): GiphyApi {
         return retrofit.create(GiphyApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGiphyRepository(api: GiphyApi): GiphyRepository {
+        return RemoteGiphyRepository(api)
     }
 }

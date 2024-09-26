@@ -1,11 +1,10 @@
 package com.marus.clililabs_test_task.ui.details
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marus.clililabs_test_task.model.Gif
 import com.marus.clililabs_test_task.repository.GiphyRepository
-import com.marus.clililabs_test_task.util.NetworkMonitor
+import com.marus.clililabs_test_task.util.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GifDetailsViewModel @Inject constructor(
-    private val repository: GiphyRepository
+    private val repository: GiphyRepository,
+    private val logger: Logger
 ) : ViewModel() {
 
     companion object {
@@ -34,7 +34,7 @@ class GifDetailsViewModel @Inject constructor(
 
     fun findGifById(id: String) {
         if (_gif.value == null) {
-            Log.d(TAG, "findGifById() called with: id = $id")
+            logger.d(TAG, "findGifById() called with: id = $id")
             viewModelScope.launch {
                 try {
                     setLoading(true)
@@ -42,7 +42,7 @@ class GifDetailsViewModel @Inject constructor(
                     val gif = repository.findGifById(id)
                     _gif.value = gif
                 } catch (e: Exception) {
-                    Log.e(TAG, "Error searching GIFs", e)
+                    logger.e(TAG, "Error searching GIFs", e)
                     e.message?.let {
                         showError(it)
                     }
@@ -52,7 +52,7 @@ class GifDetailsViewModel @Inject constructor(
                 }
             }
         } else {
-            Log.d(TAG, "gif already loaded")
+            logger.d(TAG, "gif already loaded")
         }
     }
 

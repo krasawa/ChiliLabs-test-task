@@ -5,9 +5,9 @@ import com.marus.clililabs_test_task.model.Images
 import com.marus.clililabs_test_task.model.OriginalImage
 
 object SampleData {
-    fun getGifSample(): Gif {
+    fun getGifSample(id: String = "12345"): Gif {
         return Gif(
-            id = "12345",
+            id = id,
             title = "Funny Cat",
             images = Images(
                 original = OriginalImage(
