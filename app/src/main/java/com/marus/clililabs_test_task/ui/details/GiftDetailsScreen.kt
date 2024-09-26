@@ -1,6 +1,9 @@
 package com.marus.clililabs_test_task.ui.details
 
+import android.app.Activity
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,12 +11,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -21,20 +24,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
 import com.bumptech.glide.integration.compose.CrossFade
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import com.marus.clililabs_test_task.R
 import com.marus.clililabs_test_task.model.Gif
-import com.marus.clililabs_test_task.model.Images
-import com.marus.clililabs_test_task.model.OriginalImage
-import com.marus.clililabs_test_task.ui.main.GifItem
+import com.marus.clililabs_test_task.ui.common.views.LoadingView
+import com.marus.clililabs_test_task.ui.theme.WhiteSemiTransparent
 import com.marus.clililabs_test_task.ui.util.SampleData
 
 
@@ -44,16 +47,17 @@ fun GiftDetailsScreen(
     gifId: String,
     viewModel: GifDetailsViewModel
 ) {
-    val navController = rememberNavController()
     val gif by viewModel.gif.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
                 title = { Text(text = stringResource(R.string.title_gif_details)) },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.popBackStack()
+                        (context as? Activity)?.finish()
                     }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
@@ -68,6 +72,7 @@ fun GiftDetailsScreen(
         gif?.let {
             GifDetailsScreenContent(
                 innerPadding = innerPadding,
+                isLoading = isLoading,
                 gif = it
             )
         }
@@ -78,6 +83,7 @@ fun GiftDetailsScreen(
 @Composable
 fun GifDetailsScreenContent(
     innerPadding: PaddingValues,
+    isLoading: Boolean,
     gif: Gif
 ) {
     Box(
@@ -98,13 +104,32 @@ fun GifDetailsScreenContent(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.TopCenter)
+                .align(Alignment.BottomCenter)
+                .background(WhiteSemiTransparent)
+                .padding(16.dp)
         ) {
-            Text(
-                text = gif.title,
-                fontSize = 16.sp,
-                modifier = Modifier
-                    .fillMaxWidth()
+            Column {
+                Text(
+                    text = gif.username,
+                    fontSize = 16.sp,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    fontWeight = FontWeight.SemiBold
+                )
+
+                Text(
+                    text = gif.title,
+                    fontSize = 16.sp,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+
+            }
+        }
+
+        if (isLoading) {
+            LoadingView(
+                modifier = Modifier.align(Alignment.Center)
             )
         }
     }
@@ -117,6 +142,7 @@ fun GifDetailsScreenContentPreview() {
 
     GifDetailsScreenContent(
         innerPadding = PaddingValues(16.dp),
+        isLoading = false,
         gif = gif
     )
 }

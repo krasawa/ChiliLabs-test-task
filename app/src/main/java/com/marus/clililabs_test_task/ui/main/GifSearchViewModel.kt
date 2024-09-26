@@ -27,16 +27,12 @@ class GifSearchViewModel @Inject constructor(
 
     private var currentQueryValue: String? = null
 
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
-
     private val _currentSearchResult: MutableStateFlow<PagingData<Gif>> = MutableStateFlow(value = PagingData.empty())
     val currentSearchResult: MutableStateFlow<PagingData<Gif>> get() = _currentSearchResult
 
     fun searchGifs(query: String) {
         Log.d(TAG, "searchGifs() called with: query = $query")
-        if (query != currentQueryValue) {
-            setLoading(true)
+        if (query.isNotEmpty() && query != currentQueryValue) {
             currentQueryValue = query
 
             viewModelScope.launch {
@@ -46,19 +42,12 @@ class GifSearchViewModel @Inject constructor(
                     .collect { pagingData ->
                         Log.d(TAG, "Result received")
                         _currentSearchResult.value = pagingData
-
-                        delay(500)
-                        setLoading(false)
                     }
             }
-
-        } else {
-            Log.d(TAG, "the same query, returning last result")
         }
     }
 
-    private fun setLoading(value: Boolean) {
-        Log.d(TAG, "setLoadingState: $value")
-        _isLoading.value = value
+    fun clearSearchResults() {
+        _currentSearchResult.value = PagingData.empty()
     }
 }

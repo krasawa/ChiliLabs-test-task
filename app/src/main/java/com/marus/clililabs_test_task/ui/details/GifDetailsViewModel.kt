@@ -6,6 +6,7 @@ import com.marus.clililabs_test_task.model.Gif
 import com.marus.clililabs_test_task.repository.GiphyRepository
 import com.marus.clililabs_test_task.ui.common.view_model.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,18 +24,23 @@ class GifDetailsViewModel @Inject constructor(
     val gif: StateFlow<Gif?> = _gif.asStateFlow()
 
     fun findGifById(id: String) {
-        Log.d(TAG, "findGifById() called with: id = $id")
-        viewModelScope.launch {
-            try {
-                setLoading(true)
+        if (_gif.value == null) {
+            Log.d(TAG, "findGifById() called with: id = $id")
+            viewModelScope.launch {
+                try {
+                    setLoading(true)
 
-                val gif = repository.findGifById(id)
-                _gif.value = gif
-            } catch (e: Exception) {
-                Log.e(TAG, "Error searching GIFs", e)
-            } finally {
-                setLoading(false)
+                    val gif = repository.findGifById(id)
+                    _gif.value = gif
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error searching GIFs", e)
+                } finally {
+                    delay(500)
+                    setLoading(false)
+                }
             }
+        } else {
+            Log.d(TAG, "gif already loaded")
         }
     }
 }

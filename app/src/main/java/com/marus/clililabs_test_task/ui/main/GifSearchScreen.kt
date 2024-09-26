@@ -14,6 +14,10 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -81,6 +85,9 @@ fun GifSearchScreen(
                         query = query,
                         onQueryChanged = { newQuery ->
                             query = newQuery
+                            if (newQuery.isEmpty()) {
+                                viewModel.clearSearchResults()
+                            }
                         },
                         onSearch = {
                             viewModel.searchGifs(query)
@@ -179,6 +186,20 @@ fun SearchBar(
     val debouncePeriod = 500L
     var searchJob by remember { mutableStateOf<Job?>(null) }
 
+    val trailingIconView = @Composable {
+        IconButton(
+            onClick = {
+                onQueryChanged("")
+            },
+        ) {
+            Icon(
+                Icons.Default.Clear,
+                contentDescription = "",
+                tint = Color.Black
+            )
+        }
+    }
+
     TextField(
         value = query,
         onValueChange = { newQuery ->
@@ -195,6 +216,7 @@ fun SearchBar(
             )
         },
         shape = RoundedCornerShape(12.dp),
+        trailingIcon = if (query.isNotBlank()) trailingIconView else null,
         colors = TextFieldDefaults.colors(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
@@ -230,7 +252,7 @@ fun GifItem(
             transition = CrossFade,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .clip(RoundedCornerShape(15.dp))
+                .clip(RoundedCornerShape(12.dp))
         )
     }
 }
