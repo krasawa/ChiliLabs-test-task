@@ -21,11 +21,16 @@ class GiphyPagingSource(
                 offset = position
             )
 
-            LoadResult.Page(
-                data = response.data,
-                prevKey = if (position == 0) null else position - params.loadSize,
-                nextKey = if (response.data.isEmpty()) null else position + params.loadSize
-            )
+            if (response.isSuccessful()) {
+                LoadResult.Page(
+                    data = response.data,
+                    prevKey = if (position == 0) null else position - params.loadSize,
+                    nextKey = if (response.data.isEmpty()) null else position + params.loadSize
+                )
+            } else {
+                val exception = Exception(response.getErrorMessage())
+                LoadResult.Error(exception)
+            }
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
