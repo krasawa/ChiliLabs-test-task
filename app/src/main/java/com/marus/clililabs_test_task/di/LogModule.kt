@@ -1,6 +1,5 @@
 package com.marus.clililabs_test_task.di
 
-import com.marus.clililabs_test_task.data.api.service.GiphyApi
 import com.marus.clililabs_test_task.util.DefaultLogger
 import com.marus.clililabs_test_task.util.Logger
 import dagger.Module
@@ -14,7 +13,7 @@ import javax.inject.Singleton
 object LogModule {
     @Provides
     @Singleton
-    fun provideLogger(api: GiphyApi): Logger {
+    fun provideLogger(): Logger {
         return DefaultLogger()
     }
 }

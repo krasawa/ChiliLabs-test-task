@@ -70,7 +70,7 @@ fun GiftDetailsScreen(
                 )
             }
         ) { innerPadding ->
-            LaunchedEffect(key1 = true) {
+            LaunchedEffect(key1 = gifId) {
                 viewModel.findGifById(gifId)
             }
 
@@ -148,7 +148,7 @@ fun GifDetailsScreenContent(
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun GifDetailsScreenContentPreview() {
     val gif = SampleData.getGifSample()

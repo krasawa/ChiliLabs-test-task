@@ -29,6 +29,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -54,8 +55,6 @@ import com.marus.clililabs_test_task.data.model.Gif
 import com.marus.clililabs_test_task.ui.common.LoadingView
 import com.marus.clililabs_test_task.ui.theme.CliliLabstesttaskTheme
 import com.marus.clililabs_test_task.ui.theme.ScreenBackground
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -103,13 +102,8 @@ fun GifSearchScreen(
                         }
                     )
 
-                    val columns = remember(configuration.orientation) {
-                        if (configuration.orientation == ORIENTATION_PORTRAIT) {
-                            2
-                        } else {
-                            3
-                        }
-                    }
+                    val isPortrait = configuration.orientation == ORIENTATION_PORTRAIT
+                    val columns = if (isPortrait) 2 else 3
 
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(columns),
@@ -229,6 +223,7 @@ fun SearchBar(
 ) {
     val debouncePeriod = 500L
     var searchJob by remember { mutableStateOf<Job?>(null) }
+    val coroutineScope = rememberCoroutineScope()
 
     val trailingIconView = @Composable {
         IconButton(
@@ -249,7 +244,7 @@ fun SearchBar(
         onValueChange = { newQuery ->
             onQueryChanged(newQuery)
             searchJob?.cancel()
-            searchJob = CoroutineScope(Dispatchers.Main).launch {
+            searchJob = coroutineScope.launch {
                 delay(debouncePeriod)
                 onSearch()
             }

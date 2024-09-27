@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.marus.clililabs_test_task.ui.theme.CliliLabstesttaskTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

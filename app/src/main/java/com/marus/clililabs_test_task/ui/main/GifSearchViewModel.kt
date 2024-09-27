@@ -21,7 +21,7 @@ class GifSearchViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
-        private const val TAG = "GiphyViewModel"
+        private const val TAG = "GifSearchViewModel"
     }
 
     private var currentQueryValue: String? = null
